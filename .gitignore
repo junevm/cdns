@@ -1,0 +1,19 @@
+# dotenv environment variables file
+.env*
+!.env.example
+
+# CI/CD artifacts and cache
+.cache/
+coverage.out
+gosec-report.json
+licenses-report.txt
+dist/
+CHANGELOG_PREVIEW.md
+
+
+
+todo.md
+/findings.md
+/progress.md
+/task_plan.md
+task_plan.md

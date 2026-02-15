@@ -1,0 +1,13 @@
+# CDNS Configuration
+
+logger:
+  level: warn # debug, info, warn, error
+  format: text # text, json
+
+dns:
+  default_scope: active # active, all, explicit
+  default_interfaces: [] # list of interface names, e.g. ["eth0", "wlan0"]
+  #custom_presets:
+  # Add your personal DNS servers here
+  #personal: ["1.1.1.1", "1.0.0.1"]
+  # office: ["10.0.0.53", "10.0.0.54"]

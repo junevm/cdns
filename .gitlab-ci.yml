@@ -1,0 +1,71 @@
+# ==============================================================================
+# GitLab CI/CD Pipeline
+# ==============================================================================
+# Purpose: Enforce quality gates and automate deployment for CLI and docs
+#
+# Architecture:
+#   - CLI: Go application (apps/cli)
+#   - Docs: VitePress site (apps/documentation)
+#   - Tooling: mise for consistent local/CI execution
+#
+# Trust boundaries:
+#   - MRs: Run quality checks only (no deployments)
+#   - Main: Run all checks + deploy docs to GitLab Pages
+#   - Tags: Future CLI release automation (not yet implemented)
+# ==============================================================================
+
+# Stages define execution order (jobs within a stage run in parallel)
+stages:
+  - test
+  - build
+  - release
+  - deploy
+
+default:
+  # Retry transient failures only (not code failures)
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+      - api_failure
+
+include:
+  - local: ".gitlab/ci/test.yml"
+  - local: ".gitlab/ci/build.yml"
+  - local: ".gitlab/ci/release.yml"
+  - local: ".gitlab/ci/deploy.yml"
+
+# ==============================================================================
+# NOTES ON PIPELINE ORGANIZATION
+# ==============================================================================
+#
+# This pipeline was reorganized to remove cargo-culted jobs and align with
+# the actual repository structure (Go CLI + VitePress docs).
+#
+# REMOVED JOBS:
+# - build:client / test:client / deploy:client (no client app exists)
+# - security:dependencies with pnpm (repository uses Bun)
+# - Fragmented stage structure (reduced from 6 to 5 stages)
+#
+# IMPROVEMENTS:
+# - All jobs match actual apps in repository
+# - Consistent use of mise for tooling
+# - Proper trust boundaries (MR vs main vs tags)
+# - Efficient caching keyed to actual dependencies
+# - Clear inline documentation
+# - GoReleaser integration for CLI releases
+#
+# RELEASE PROCESS:
+# 1. Create a version tag: git tag -a v1.0.0 -m "Release v1.0.0"
+# 2. Push the tag: git push origin v1.0.0
+# 3. Pipeline automatically builds and releases CLI binaries
+# 4. Binaries available for linux/darwin/windows on amd64/arm64
+#
+# GORELEASER CONFIGURATION:
+# - Configuration: .goreleaser.yml
+# - Runs on tags matching: v*.*.*
+# - Creates GitLab releases with binaries and checksums
+# - Generates changelog from conventional commits
+# ==============================================================================
+

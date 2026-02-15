@@ -1,0 +1,113 @@
+[tools]
+golangci-lint = { version = "latest" }
+lefthook = "2.1.0"
+go = "1.25.7"
+cocogitto = "6.5.0"
+node = "24.13.0"
+pnpm = "10.29.2"
+goreleaser = "2.13.3"
+
+
+[hooks]
+postinstall = ['mise lock', 'lefthook install']
+
+
+[env]
+DO_NOT_TRACK = "1"
+
+[settings]
+experimental = true
+quiet = false
+lockfile = true
+
+[tasks.clean]
+description = "Cleanup the project and bring it to fresh state"
+run = '''
+mise cli:clean
+mise docs:clean
+mise prune
+# Remove all installed mise tools
+for tool in $(mise ls --installed | awk '{print $1}' | grep -v '^$'); do
+  if [ -n "$tool" ] && [ "$tool" != "Tool" ]; then
+    mise uninstall "$tool" 2>/dev/null || true
+  fi
+done
+git clean -fdX # Remove everything ignored by git
+echo "Project cleaned."
+'''
+
+
+[tasks.setup]
+description = "Set up the development environment"
+run = ["mise install", "mise cli:setup", "mise docs:setup"]
+
+[tasks."cli:setup"]
+description = "Set up the development dependencies for the server"
+dir = "apps/cli"
+run = ["go mod tidy"]
+
+
+[tasks."cli:dev"]
+description = "Run the CLI in development mode"
+dir = "apps/cli"
+run = ["go run ./cmd/app"]
+
+
+[tasks."cli:test"]
+description = "Run all tests for the CLI"
+dir = "apps/cli"
+run = "go test -v -race -coverprofile=coverage.out ./..."
+
+
+[tasks."cli:lint"]
+description = "Run linters on the CLI codebase"
+dir = "apps/cli"
+run = ["go vet ./... && go fmt ./...", "golangci-lint run"]
+
+
+[tasks."cli:tidy"]
+description = "Tidy Go modules for the CLI codebase"
+dir = "apps/cli"
+run = "go mod tidy"
+
+
+[tasks."cli:clean"]
+description = "Remove CLI build artifacts"
+dir = "apps/cli"
+run = ["go clean -i -cache -modcache -testcache -fuzzcache"]
+
+
+[tasks."docs:setup"]
+description = "Set up the development dependencies for the documentation site"
+dir = "apps/documentation"
+run = ["pnpm install"]
+
+[tasks."docs:dev"]
+description = "Start the local development server for the documentation site"
+dir = "apps/documentation"
+depends = ["docs:setup"]
+run = ["pnpm run dev"]
+
+[tasks."docs:build"]
+description = "Build the documentation site for production deployment"
+dir = "apps/documentation"
+run = ["pnpm run build"]
+
+[tasks."docs:start"]
+description = "Launch the production server for the documentation site"
+dir = "apps/documentation"
+depends = ["docs:build"]
+run = ["pnpm run preview"]
+
+[tasks."docs:clean"]
+description = "Remove documentation site build artifacts"
+dir = "apps/documentation"
+run = []
+
+[tasks."release:snapshot"]
+description = "Build a snapshot release without publishing (for testing)"
+run = "goreleaser release --snapshot --clean --skip=publish"
+
+[tasks."release:check"]
+description = "Validate the GoReleaser configuration"
+run = "goreleaser check"

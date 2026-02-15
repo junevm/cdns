@@ -1,0 +1,88 @@
+# GoReleaser configuration for Enterprise Go CLI
+# https://goreleaser.com
+
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - id: cdns
+    main: ./cmd/app
+    binary: cdns
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+
+archives:
+  - id: cdns
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE*
+      - config.yaml
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "README"
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: "Bug fixes"
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: Others
+      order: 999
+
+# Supply chain security with SBOM generation
+sboms:
+  - id: archive
+    artifacts: archive
+  - id: source
+    artifacts: source
+# Code signing (requires cosign to be set up)
+# signs:
+#   - cmd: cosign
+#     env:
+#       - COSIGN_EXPERIMENTAL=1
+#     certificate: '${artifact}.pem'
+#     args:
+#       - sign-blob
+#       - '--output-certificate=${certificate}'
+#       - '--output-signature=${signature}'
+#       - '${artifact}'
+#       - "--yes"
+#     artifacts: checksum
+#     output: true

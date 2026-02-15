@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  cli-test:
+    name: CLI Test & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise
+        uses: jdx/mise-action@v2
+        with:
+          experimental: true
+          install: true
+
+      - name: Setup Go Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Run Linter
+        run: mise run cli:lint
+
+      - name: Run Tests
+        run: mise run cli:test
+
+  cli-build:
+    name: CLI Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise
+        uses: jdx/mise-action@v2
+        with:
+          experimental: true
+          install: true
+
+      - name: Build CLI
+        working-directory: apps/cli
+        run: go build -v ./...
+
+  docs-build:
+    name: Docs Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise
+        uses: jdx/mise-action@v2
+        with:
+          experimental: true
+          install: true
+
+      - name: Install Dependencies
+        working-directory: apps/documentation
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Documentation
+        working-directory: apps/documentation
+        run: pnpm run build
