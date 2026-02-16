@@ -1,36 +1,10 @@
 # ==============================================================================
-# Lefthook Configuration - Local Quality Gates
-# ==============================================================================
-# Purpose: Enforce quality standards before code reaches CI/CD
-#
-# Philosophy:
-#   - Fail fast for issues that are cheap to catch locally
-#   - Operate only on changed files where possible
-#   - Provide clear, actionable error messages
-#   - Never duplicate expensive CI checks
-#
-# Hook phases:
-#   - pre-commit: Fast formatting and basic correctness (< 5 seconds)
-#   - commit-msg: Message format validation (< 1 second)
-#   - pre-push: Targeted tests on affected code (< 30 seconds)
-#
-# Skip hooks only for emergencies: git commit --no-verify
+# Lefthook Configuration
 # ==============================================================================
 
-# ------------------------------------------------------------------------------
-# PRE-COMMIT: Fast formatting and basic correctness
-# ------------------------------------------------------------------------------
-# Runs on: Staged files only
-# Purpose: Catch trivial errors before they enter the commit history
-# Speed target: < 5 seconds
-# ------------------------------------------------------------------------------
 pre-commit:
   parallel: true
   commands:
-    # Format Go code and stage changes
-    # Why: Enforces consistent Go formatting per language standards
-    # Scope: Only staged *.go files
-    # Speed: ~1 second for typical changes
     format-go:
       glob: "apps/cli/**/*.go"
       run: |
@@ -38,132 +12,32 @@ pre-commit:
         git add {staged_files}
       stage_fixed: true
 
-    # Run fast Go linters on staged files
-    # Why: Catches common Go mistakes (unused vars, shadowing, etc.)
-    # Scope: Only staged files in apps/cli
-    # Speed: ~2-3 seconds for typical changes
-    # Note: Full golangci-lint runs in CI (too slow for pre-commit)
     lint-go-fast:
       glob: "apps/cli/**/*.go"
       run: cd apps/cli && go vet ./...
 
-    # Validate Go modules are tidy
-    # Why: Prevents "go.mod not tidy" CI failures
-    # Scope: Only when go.mod or go.sum change
-    # Speed: ~1 second
     tidy-go-mod:
       glob: "apps/cli/{go.mod,go.sum}"
       run: cd apps/cli && go mod tidy && git add go.mod go.sum
 
-    # Check for common mistakes in documentation
-    # Why: Catches broken markdown links and malformed frontmatter
-    # Scope: Only staged markdown files in documentation app
-    # Speed: ~1 second
-    check-docs-format:
-      glob: "apps/documentation/**/*.md"
-      run: |
-        # Check for trailing whitespace (common markdown mistake)
-        if grep -n '[[:space:]]$' {staged_files}; then
-          echo "Error: Trailing whitespace found in markdown files"
-          exit 1
-        fi
-
-    # Prevent committing common secrets patterns
-    # Why: Catch accidental secret commits before they reach repository
-    # Scope: All staged files
-    # Speed: ~1 second
-    # Note: This is a basic check; CI runs more thorough scanning
     check-secrets-basic:
       run: |
         if git diff --cached | grep -iE '(api_key|secret_key|password|token)["\s]*[:=]["\s]*[a-zA-Z0-9]{8,}'; then
           echo "Error: Potential secret detected in staged changes"
-          echo "Review your changes and remove any hardcoded secrets"
           exit 1
         fi
 
-# ------------------------------------------------------------------------------
-# COMMIT-MSG: Conventional Commits validation
-# ------------------------------------------------------------------------------
-# Runs on: Commit message file
-# Purpose: Enforce Conventional Commits format for changelog generation
-# Speed target: < 1 second
-# ------------------------------------------------------------------------------
 commit-msg:
   commands:
-    # Validate commit message format using cocogitto
-    # Why: Enforces Conventional Commits for semantic versioning and changelogs
-    # Format: <type>(<scope>): <description>
-    # Speed: < 1 second
-    # Tool: cocogitto (cog) - installed via mise
     validate-conventional-commits:
       run: cog verify --file {1}
 
-# ------------------------------------------------------------------------------
-# PRE-PUSH: Targeted tests and comprehensive checks
-# ------------------------------------------------------------------------------
-# Runs on: All commits being pushed
-# Purpose: Prevent pushing broken code while avoiding full CI duplication
-# Speed target: < 30 seconds
-# ------------------------------------------------------------------------------
 pre-push:
   commands:
-    # Run Go tests only if Go code changed
-    # Why: Catch test failures before pushing (faster feedback than CI)
-    # Scope: Full CLI test suite, but only if Go files changed
-    # Speed: ~10-15 seconds for full suite
-    # Note: Does NOT run race detector (too slow, runs in CI instead)
     test-go:
       glob: "apps/cli/**/*.go"
       run: cd apps/cli && go test ./...
 
-    # Verify Go code compiles
-    # Why: Catch compilation errors before push (instant CI failure otherwise)
-    # Scope: Full CLI build
-    # Speed: ~2-3 seconds
     build-go:
       glob: "apps/cli/**/*.go"
       run: cd apps/cli && go build -o /dev/null ./cmd/app
-
-    # Build documentation site if docs changed
-    # Why: Catch VitePress build failures before pushing
-    # Scope: Only if documentation files changed
-    # Speed: ~5-10 seconds
-    # Note: Skipped by default (too slow); enable with LEFTHOOK_EXCLUDE="" git push
-    build-docs:
-      skip:
-        - merge
-        - rebase
-      glob: "apps/documentation/**/*.{md,vue,ts,js,json}"
-      run: |
-        echo "⚠️  Documentation build check skipped (enable with: LEFTHOOK_EXCLUDE='' git push)"
-        echo "💡 CI will verify documentation builds on push"
-        exit 0
-      # Uncomment to enable (warning: adds 10-15 seconds to push time)
-      # run: cd apps/documentation && bun install --frozen-lockfile && bun run build
-
-    # Validate CI configuration if modified
-    # Why: Catch GitLab CI syntax errors before pushing
-    # Scope: Only if .gitlab-ci.yml or included files changed
-    # Speed: ~1 second
-    # Note: Requires gitlab-ci-local or similar tool (optional check)
-    # validate-gitlab-ci:
-    #   glob: ".gitlab-ci.yml"
-    #   run: echo "Warning: GitLab CI validation skipped (install gitlab-ci-local to enable)"
-
-# ==============================================================================
-# NOTES ON REMOVED HOOKS
-# ==============================================================================
-#
-# REMOVED: Full golangci-lint run in pre-commit
-# Reason: Too slow (5-10 seconds), duplicates CI
-# Replacement: Fast go vet check + full lint in CI
-#
-# REMOVED: Full test suite with race detector in pre-push
-# Reason: Race detector adds 5-10x overhead, runs in CI
-# Replacement: Fast test run without race detector
-#
-# REMOVED: Global formatting that runs on all files
-# Reason: Inefficient, modifies unrelated files
-# Replacement: Scoped formatting on staged files only
-#
-# ==============================================================================

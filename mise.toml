@@ -1,11 +1,9 @@
 [tools]
 golangci-lint = { version = "latest" }
-lefthook = "2.1.0"
-go = "1.25.7"
-cocogitto = "6.5.0"
-node = "24.13.0"
-pnpm = "10.29.2"
-goreleaser = "2.13.3"
+lefthook = "latest"
+go = "latest"
+cocogitto = "latest"
+goreleaser = "latest"
 
 
 [hooks]
@@ -76,33 +74,6 @@ description = "Remove CLI build artifacts"
 dir = "apps/cli"
 run = ["go clean -i -cache -modcache -testcache -fuzzcache"]
 
-
-[tasks."docs:setup"]
-description = "Set up the development dependencies for the documentation site"
-dir = "apps/documentation"
-run = ["pnpm install"]
-
-[tasks."docs:dev"]
-description = "Start the local development server for the documentation site"
-dir = "apps/documentation"
-depends = ["docs:setup"]
-run = ["pnpm run dev"]
-
-[tasks."docs:build"]
-description = "Build the documentation site for production deployment"
-dir = "apps/documentation"
-run = ["pnpm run build"]
-
-[tasks."docs:start"]
-description = "Launch the production server for the documentation site"
-dir = "apps/documentation"
-depends = ["docs:build"]
-run = ["pnpm run preview"]
-
-[tasks."docs:clean"]
-description = "Remove documentation site build artifacts"
-dir = "apps/documentation"
-run = []
 
 [tasks."release:snapshot"]
 description = "Build a snapshot release without publishing (for testing)"

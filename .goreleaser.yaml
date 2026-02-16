@@ -13,8 +13,8 @@ builds:
       - linux
     goarch:
       - amd64
-    main: ./cmd/fan/main.go
-    binary: msifancontrol
+    main: ./apps/cli/cmd/app/main.go
+    binary: cdns
     ldflags:
       - -s -w -X main.Version={{.Version}}
 
@@ -44,13 +44,13 @@ changelog:
       - Merge branch
 
 brews:
-  - name: msifancontrol
+  - name: cdns
     repository:
       owner: junevm
       name: homebrew-tap
       token: "{{ .Env.TAP_GITHUB_TOKEN }}"
-    homepage: "https://github.com/junevm/msifancontrol"
-    description: "🪭 fan control tui for msi laptops using linux"
+    homepage: "https://github.com/junevm/cdns"
+    description: "Linux DNS Management Made Simple"
     license: "MIT"
     install: |
-      bin.install "msifancontrol"
+      bin.install "cdns"

@@ -1,11 +1,11 @@
 #!/bin/sh
 set -e
 
-# msifancontrol Installer Script
-# Usage: curl -sfL https://raw.githubusercontent.com/junevm/msifancontrol/main/install.sh | sh
+# CDNS Installer Script
+# Usage: curl -sfL https://raw.githubusercontent.com/junevm/cdns/main/install.sh | sh
 
-REPO="junevm/msifancontrol"
-BINARY="msifancontrol"
+REPO="junevm/cdns"
+BINARY="cdns"
 INSTALL_DIR="/usr/local/bin"
 
 # Detect OS and Arch
@@ -46,16 +46,13 @@ else
 fi
 
 # Construct download URL
-# Example: https://github.com/junevm/msifancontrol/releases/download/v1.0.0/msifancontrol_1.0.0_Linux_x86_64.tar.gz
+# Example: https://github.com/junevm/cdns/releases/download/v1.0.0/cdns_1.0.0_Linux_amd64.tar.gz
 
 VERSION=${LATEST_TAG#v}
 OS_CAP="$(echo "$OS" | awk '{print toupper(substr($0,1,1))substr($0,2)}')"
-# Correcting logic to handle GoReleaser naming convention, currently Linux is capitalized
-# But let's check exact naming template from .goreleaser.yaml
-# It's: {{ .ProjectName }}_{{ .Version }}_{{ title .Os }}_{{ .Arch }}.tar.gz
-# So: msifancontrol_1.0.0_Linux_amd64.tar.gz
+# Correcting logic to handle GoReleaser naming convention: {{ .ProjectName }}_{{ .Version }}_{{ title .Os }}_{{ .Arch }}.tar.gz
 
-DOWNLOAD_URL="https://github.com/junevm/msifancontrol/releases/download/$LATEST_TAG/${BINARY}_${VERSION}_${OS_CAP}_${ARCH}.tar.gz"
+DOWNLOAD_URL="https://github.com/junevm/cdns/releases/download/$LATEST_TAG/${BINARY}_${VERSION}_${OS_CAP}_${ARCH}.tar.gz"
 
 # Download and extract
 TMP_DIR=$(mktemp -d)
