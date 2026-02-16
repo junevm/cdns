@@ -1,17 +1,11 @@
 <div align="center">
 <img src="./assets/icon.svg" alt="CDNS" width="120" height="120" />
 
-# CDNS
-
 **Linux DNS Management Made Simple**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
-**CDNS** is a robust, interactive CLI tool for managing DNS settings on Linux. It abstracts away the complexity of modern Linux networking (NetworkManager, systemd-resolved, resolv.conf) to give you simple, safe control over your DNS providers.
-
-## Visuals
+**CDNS (change DNS)** is a robust, interactive CLI tool for managing DNS settings on Linux. It abstracts away the complexity of modern Linux networking (NetworkManager, systemd-resolved, resolv.conf) to give you simple, safe control over your DNS providers.
 
 ```
   ___ ___  _  _ ___
@@ -44,9 +38,7 @@ Check the [Releases](https://github.com/junevm/cdns/releases) page for your arch
 **Interactive Mode (Recommended)**
 
 ```bash
-sudo cdns
-# or
-sudo cdns menu
+cdns
 ```
 
 **Quick Commands**
@@ -56,7 +48,7 @@ sudo cdns menu
 cdns list
 
 # Set DNS to Cloudflare
-sudo cdns set --preset cloudflare
+sudo cdns set cloudflare
 
 # Check current status
 cdns status
@@ -65,25 +57,10 @@ cdns status
 sudo cdns reset
 ```
 
-## Development
+## Contributing
 
-This project uses `mise` for task management.
-
-```bash
-# Install dependencies
-mise install
-
-# Run tests
-mise run cli:test
-
-# Run linter
-mise run cli:lint
-```
-
-## Documentation
-
-Full documentation is available in the [`apps/documentation`](./apps/documentation) directory.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to contribute to this project.
 
 ## License
 
-MIT
+See [LICENSE](./LICENSE) for details.
