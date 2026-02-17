@@ -656,7 +656,6 @@ Before implementing non-trivial changes:
 ### Required Sources (in priority order)
 
 1. **Official Documentation**
-
    - Go standard library (pkg.go.dev)
    - Cobra documentation
    - Uber Fx documentation
@@ -664,7 +663,6 @@ Before implementing non-trivial changes:
    - Bubble Tea documentation
 
 2. **Project Documentation**
-
    - `apps/cli/docs/`
    - ADRs in `apps/cli/docs/adr/`
    - Runbooks in `apps/cli/docs/runbooks/`
