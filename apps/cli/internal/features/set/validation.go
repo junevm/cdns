@@ -69,9 +69,12 @@ func ValidatePresetName(name string) error {
 		return ErrEmptyPresetName
 	}
 
+	// Canonicalize name for lookup
+	name = strings.ToLower(name)
+
 	_, ok := presets.Get(name)
 	if !ok {
-		return fmt.Errorf("%w: %s (available: cloudflare, google, quad9, opendns, adguard)", ErrInvalidPresetName, name)
+		return fmt.Errorf("%w: %s (use 'cdns list' to see all available presets)", ErrInvalidPresetName, name)
 	}
 
 	return nil

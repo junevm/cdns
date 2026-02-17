@@ -88,10 +88,11 @@ func TestValidatePresetName(t *testing.T) {
 		{name: "valid - quad9", presetName: "quad9", wantErr: false},
 		{name: "valid - opendns", presetName: "opendns", wantErr: false},
 		{name: "valid - adguard", presetName: "adguard", wantErr: false},
+		{name: "valid - yandex-family", presetName: "yandex-family", wantErr: false},
 
 		{name: "invalid - empty", presetName: "", wantErr: true},
 		{name: "invalid - unknown", presetName: "unknown", wantErr: true},
-		{name: "invalid - case sensitive", presetName: "Cloudflare", wantErr: true},
+		{name: "valid - case insensitive", presetName: "Cloudflare", wantErr: false},
 		{name: "invalid - typo", presetName: "gogle", wantErr: true},
 	}
 

@@ -144,13 +144,19 @@ func TestAdGuard(t *testing.T) {
 func TestAllPresets(t *testing.T) {
 	all := presets.All()
 
-	expectedCount := 5 // Cloudflare, Google, Quad9, OpenDNS, AdGuard
+	expectedCount := 22
 
 	if len(all) != expectedCount {
 		t.Errorf("All() returned %d presets, want %d", len(all), expectedCount)
 	}
 
-	expectedNames := []string{"cloudflare", "google", "quad9", "opendns", "adguard"}
+	expectedNames := []string{
+		"cloudflare", "google", "quad9", "opendns", "opendns-family",
+		"adguard", "adguard-family", "cleanbrowsing-family", "cleanbrowsing-security",
+		"yandex-basic", "yandex-safe", "yandex-family", "comodo", "verisign",
+		"dnswatch", "level3", "tencent", "alibaba", "neustar", "opennic",
+		"he", "safeserve",
+	}
 	for _, name := range expectedNames {
 		if _, ok := all[name]; !ok {
 			t.Errorf("All() missing preset: %s", name)
