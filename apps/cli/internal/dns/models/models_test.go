@@ -3,7 +3,7 @@ package models_test
 import (
 	"testing"
 
-	"cli/internal/dns/models"
+	"github.com/junevm/cdns/apps/cli/internal/dns/models"
 )
 
 func TestDNSServer(t *testing.T) {

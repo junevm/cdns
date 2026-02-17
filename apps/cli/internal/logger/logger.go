@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"os"
 
-	"cli/internal/config"
+	"github.com/junevm/cdns/apps/cli/internal/config"
 
 	"golang.org/x/term"
 )

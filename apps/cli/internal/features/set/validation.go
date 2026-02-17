@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"cli/internal/dns/presets"
+	"github.com/junevm/cdns/apps/cli/internal/dns/presets"
 )
 
 var (

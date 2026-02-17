@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"cli/internal/dns/models"
+	"github.com/junevm/cdns/apps/cli/internal/dns/models"
 )
 
 // ConfigWriter handles applying DNS configurations to the system

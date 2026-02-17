@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"cli/internal/dns/backend"
-	"cli/internal/dns/models"
+	"github.com/junevm/cdns/apps/cli/internal/dns/backend"
+	"github.com/junevm/cdns/apps/cli/internal/dns/models"
 )
 
 // mockSystemOps implements backend.SystemOps for testing

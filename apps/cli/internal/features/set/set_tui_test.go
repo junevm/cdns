@@ -1,8 +1,8 @@
 package set
 
 import (
-	"cli/internal/config"
-	"cli/internal/dns/backend"
+	"github.com/junevm/cdns/apps/cli/internal/config"
+	"github.com/junevm/cdns/apps/cli/internal/dns/backend"
 	"github.com/stretchr/testify/assert"
 	"log/slog"
 	"testing"

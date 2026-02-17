@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"testing"
 
-	"cli/internal/config"
+	"github.com/junevm/cdns/apps/cli/internal/config"
 )
 
 func TestNew(t *testing.T) {

@@ -1,6 +1,6 @@
 package presets
 
-import "cli/internal/dns/models"
+import "github.com/junevm/cdns/apps/cli/internal/dns/models"
 
 // Cloudflare returns the Cloudflare DNS preset
 func Cloudflare() models.DNSServer {

@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"runtime/debug"
 
-	"cli/internal/config"
-	"cli/internal/ui"
+	"github.com/junevm/cdns/apps/cli/internal/config"
+	"github.com/junevm/cdns/apps/cli/internal/ui"
 
 	"github.com/spf13/cobra"
 )

@@ -8,8 +8,8 @@ import (
 	"os"
 	"testing"
 
-	"cli/internal/config"
-	"cli/internal/dns/models"
+	"github.com/junevm/cdns/apps/cli/internal/config"
+	"github.com/junevm/cdns/apps/cli/internal/dns/models"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"cli/internal/ui"
+	"github.com/junevm/cdns/apps/cli/internal/ui"
 
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"

@@ -5,7 +5,7 @@ import (
 	"sort"
 	"testing"
 
-	"cli/internal/config"
+	"github.com/junevm/cdns/apps/cli/internal/config"
 
 	"github.com/stretchr/testify/assert"
 )
