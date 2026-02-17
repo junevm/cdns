@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/junevm/cdns/compare/v1.1.0...v1.1.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* go install command ([074c109](https://github.com/junevm/cdns/commit/074c10960a20fa6bc2b64f20c91558607ed62b5e))
+
 # [1.1.0](https://github.com/junevm/cdns/compare/v1.0.3...v1.1.0) (2026-02-17)
 
 
