@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/junevm/cdns/compare/v1.0.3...v1.1.0) (2026-02-17)
+
+
+### Features
+
+* **cli:** restructure CLI application and update entry points ([b84ca6f](https://github.com/junevm/cdns/commit/b84ca6ffb49fe7682fd4578d4868a216477da0fb))
+
 ## [1.0.3](https://github.com/junevm/cdns/compare/v1.0.2...v1.0.3) (2026-02-17)
 
 
