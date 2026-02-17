@@ -25,15 +25,23 @@
 
 ## Compatibility
 
-While CDNS is designed to work across any Linux distribution using standard networking stack, here is the current status:
+While CDNS is designed to work across various operating systems, here is the current status:
 
-| Distribution   | Status      |
-| :------------- | :---------- |
-| **Ubuntu**     | ✅ Verified |
-| **Debian**     | ⚠️ Untested |
-| **Fedora**     | ⚠️ Untested |
-| **Arch Linux** | ⚠️ Untested |
-| **Pop!\_OS**   | ⚠️ Untested |
+| Operating System | Distribution    | Status      |
+| :--------------- | :-------------- | :---------- |
+| **Linux**        | **Ubuntu**      | ✅ Verified |
+| **Linux**        | **Debian**      | ⚠️ Untested |
+| **Linux**        | **Fedora**      | ⚠️ Untested |
+| **Linux**        | **Arch Linux**  | ⚠️ Untested |
+| **Linux**        | **Manjaro**     | ⚠️ Untested |
+| **Linux**        | **Pop!\_OS**    | ⚠️ Untested |
+| **Linux**        | **Linux Mint**  | ⚠️ Untested |
+| **Linux**        | **openSUSE**    | ⚠️ Untested |
+| **Linux**        | **NixOS**       | ⚠️ Untested |
+| **Linux**        | **CentOS**      | ⚠️ Untested |
+| **Linux**        | **Kali Linux**  | ⚠️ Untested |
+| **macOS**        | **Darwin**      | 🏗️ WIP      |
+| **Windows**      | **Windows 10+** | 🏗️ WIP      |
 
 _If it works for you on an untested distro, please [let us know](https://github.com/junevm/cdns/issues)!_
 
@@ -68,25 +76,62 @@ Download the latest binary for your architecture from the [Releases](https://git
 
 ## Usage
 
-**Interactive Mode (Recommended)**
+CDNS works in two ways: through a friendly **Interactive TUI** (best for discovery) or via **Quick Commands** (best for automation and power users).
+
+### 🖥️ Interactive Mode (Recommended)
+
+Just run `cdns` without any arguments to open the main menu. From here, you can navigate through all features using your arrow keys.
 
 ```bash
 cdns
 ```
 
-**Quick Commands**
+### ⚡ Quick Commands
+
+For those who prefer the speed of the command line, CDNS provides a set of intuitive subcommands.
+
+#### 1. Set your DNS
+The `set` command is the heart of CDNS. You can use it with a preset name, custom IPs, or even target specific interfaces.
+
+> **Note:** Changing system DNS settings typically requires `sudo` privileges.
 
 ```bash
-# List available DNS presets
-cdns list
-
-# Set DNS to Cloudflare
+# Apply a preset (e.g., Cloudflare, Google, Quad9)
 sudo cdns set cloudflare
 
-# Check current status
+# Use custom IP addresses
+sudo cdns set 1.1.1.1 8.8.8.8
+
+# Target a specific network interface
+sudo cdns set google --interface eth0
+```
+
+**Helpful Flags for `set`:**
+- `--dry-run`: See what would happen without making any actual changes.
+- `--interface` or `-i`: Manually specify which interfaces to modify.
+- `--yes`: Skip confirmation prompts (perfect for scripts).
+
+#### 2. Explore Presets
+Not sure which provider to use? List all available presets to see names and IP addresses.
+
+```bash
+cdns list
+```
+
+#### 3. Check Current Status
+Verify your active DNS configuration and see which backend (NetworkManager, systemd-resolved, etc.) is being used.
+
+```bash
 cdns status
 
-# Restore previous settings
+# Pro tip: Use --json for machine-readable output
+cdns status --json
+```
+
+#### 4. Instant Reset
+If you need to roll back to your previous configuration, the `reset` command has your back.
+
+```bash
 sudo cdns reset
 ```
 

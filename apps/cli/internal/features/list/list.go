@@ -154,9 +154,9 @@ func (s *Service) PrintTable() error {
 
 	var headers []string
 	if showDesc {
-		headers = []string{"NAME", "TYPE", "SERVERS", "DESCRIPTION"}
+		headers = []string{"PRESET", "SOURCE", "DNS SERVERS", "NOTES"}
 	} else {
-		headers = []string{"NAME", "TYPE", "SERVERS"}
+		headers = []string{"PRESET", "SOURCE", "DNS SERVERS"}
 	}
 
 	var rows [][]string
@@ -182,13 +182,13 @@ func (s *Service) PrintTable() error {
 		style := lipgloss.NewStyle().Padding(0, 1)
 
 		switch col {
-		case 0: // Name
+		case 0: // Preset
 			style = style.Width(nameWidth)
-		case 1: // Type
+		case 1: // Source
 			style = style.Width(typeWidth)
-		case 2: // Servers
+		case 2: // DNS Servers
 			style = style.Width(serverColWidth)
-		case 3: // Description
+		case 3: // Notes
 			if showDesc {
 				style = style.Width(descColWidth)
 			}
@@ -196,8 +196,7 @@ func (s *Service) PrintTable() error {
 
 		if row == 0 { // Header
 			return style.
-				Bold(true).
-				Align(lipgloss.Center)
+				Bold(true)
 		}
 
 		return style
