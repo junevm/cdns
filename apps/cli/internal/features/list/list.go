@@ -41,10 +41,10 @@ func NewService(cfg *config.Config, logger *slog.Logger) *Service {
 
 // PresetItem represents a listed DNS preset
 type PresetItem struct {
-	Name        string
-	Servers     string
-	Type        string
-	Description string
+	Name    string
+	Slug    string
+	Servers string
+	Type    string
 }
 
 // ListPresets retrieves all available presets, sorted by name
@@ -53,20 +53,54 @@ func (s *Service) ListPresets() []PresetItem {
 
 	// 1. Built-in presets
 	builtins := presets.All()
-	for name, preset := range builtins {
+	for slug, preset := range builtins {
 		// Use correct casing for built-ins
-		displayName := name
-		switch strings.ToLower(name) {
+		displayName := slug
+		switch strings.ToLower(slug) {
 		case "cloudflare":
 			displayName = "Cloudflare"
 		case "google":
 			displayName = "Google"
 		case "opendns":
 			displayName = "OpenDNS"
+		case "opendns-family":
+			displayName = "OpenDNS Family"
 		case "adguard":
 			displayName = "AdGuard"
+		case "adguard-family":
+			displayName = "AdGuard Family"
 		case "quad9":
 			displayName = "Quad9"
+		case "cleanbrowsing-family":
+			displayName = "CleanBrowsing Family"
+		case "cleanbrowsing-security":
+			displayName = "CleanBrowsing Security"
+		case "yandex-basic":
+			displayName = "Yandex Basic"
+		case "yandex-safe":
+			displayName = "Yandex Safe"
+		case "yandex-family":
+			displayName = "Yandex Family"
+		case "comodo":
+			displayName = "Comodo"
+		case "verisign":
+			displayName = "Verisign"
+		case "dnswatch":
+			displayName = "DNS.WATCH"
+		case "level3":
+			displayName = "Level3"
+		case "tencent":
+			displayName = "Tencent"
+		case "alibaba":
+			displayName = "Alibaba"
+		case "neustar":
+			displayName = "Neustar"
+		case "opennic":
+			displayName = "OpenNIC"
+		case "he":
+			displayName = "Hurricane Electric"
+		case "safeserve":
+			displayName = "SafeServe"
 		default:
 			// Fallback: capitalize
 			if len(displayName) > 1 {
@@ -80,10 +114,10 @@ func (s *Service) ListPresets() []PresetItem {
 		}
 
 		items = append(items, PresetItem{
-			Name:        displayName,
-			Servers:     ips,
-			Type:        "Built-in",
-			Description: preset.Description,
+			Name:    displayName,
+			Slug:    slug,
+			Servers: ips,
+			Type:    "Built-in",
 		})
 	}
 
@@ -91,10 +125,10 @@ func (s *Service) ListPresets() []PresetItem {
 	if s.config != nil && s.config.DNS.CustomPresets != nil {
 		for name, ips := range s.config.DNS.CustomPresets {
 			items = append(items, PresetItem{
-				Name:        name, // Preserve user case
-				Servers:     strings.Join(ips, ", "),
-				Type:        "Custom",
-				Description: "User-defined",
+				Name:    name, // Preserve user case
+				Slug:    strings.ToLower(strings.ReplaceAll(name, " ", "-")),
+				Servers: strings.Join(ips, ", "),
+				Type:    "Custom",
 			})
 		}
 	}
@@ -115,61 +149,31 @@ func (s *Service) PrintTable() error {
 		termWidth = 80
 	}
 
-	// Calculate column widths based on available space
-	// Minimum required for fixed columns: Name (15) + Type (8) + Borders (10) + Padding (6) = 39
-	// We'll adjust based on terminal width
-
-	var nameWidth, typeWidth int
-	var showDesc bool
-
-	if termWidth < 60 {
-		// Small screen: Compact layout
-		nameWidth = 15
-		typeWidth = 8
-		showDesc = false
-	} else {
-		// Standard/Large screen
-		nameWidth = 20
-		typeWidth = 10
-		showDesc = true
-	}
-
-	// Calculate remaining width for Servers and potentially Description
-	fixedWidth := nameWidth + typeWidth + 10 // Approximation for borders/padding
-	remainingWidth := termWidth - fixedWidth
-	if remainingWidth < 10 {
-		remainingWidth = 10
-	}
-
-	var serverColWidth, descColWidth int
-	if showDesc {
-		serverColWidth = int(float64(remainingWidth) * 0.6)
-		descColWidth = remainingWidth - serverColWidth
-	} else {
-		serverColWidth = remainingWidth
-		descColWidth = 0
-	}
-
+	// Dynamic column assignment
 	items := s.ListPresets()
 
-	var headers []string
-	if showDesc {
-		headers = []string{"PRESET", "SOURCE", "DNS SERVERS", "NOTES"}
-	} else {
-		headers = []string{"PRESET", "SOURCE", "DNS SERVERS"}
+	// Column Widths
+	nameWidth := 20
+	slugWidth := 25
+	sourceWidth := 10
+
+	// Borders (5) + Padding (2*4=8) = 13
+	remainingWidth := termWidth - (nameWidth + slugWidth + sourceWidth + 15)
+	if remainingWidth < 15 {
+		remainingWidth = 15
 	}
+	serverWidth := remainingWidth
+
+	headers := []string{"PRESET", "COMMAND ID", "SOURCE", "DNS SERVERS"}
 
 	var rows [][]string
 	for _, item := range items {
-		row := []string{
+		rows = append(rows, []string{
 			item.Name,
+			item.Slug,
 			item.Type,
 			item.Servers,
-		}
-		if showDesc {
-			row = append(row, item.Description)
-		}
-		rows = append(rows, row)
+		})
 	}
 
 	t := table.New().
@@ -184,19 +188,18 @@ func (s *Service) PrintTable() error {
 		switch col {
 		case 0: // Preset
 			style = style.Width(nameWidth)
-		case 1: // Source
-			style = style.Width(typeWidth)
-		case 2: // DNS Servers
-			style = style.Width(serverColWidth)
-		case 3: // Notes
-			if showDesc {
-				style = style.Width(descColWidth)
-			}
+		case 1: // ID
+			style = style.Width(slugWidth).Foreground(lipgloss.Color("86")) // Cyan for IDs
+		case 2: // Source
+			style = style.Width(sourceWidth).Faint(true)
+		case 3: // Servers
+			style = style.Width(serverWidth)
 		}
 
 		if row == 0 { // Header
 			return style.
-				Bold(true)
+				Bold(true).
+				Foreground(lipgloss.Color("39")) // Cyan to match banner
 		}
 
 		return style

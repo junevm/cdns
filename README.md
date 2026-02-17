@@ -91,12 +91,13 @@ cdns
 For those who prefer the speed of the command line, CDNS provides a set of intuitive subcommands.
 
 #### 1. Set your DNS
+
 The `set` command is the heart of CDNS. You can use it with a preset name, custom IPs, or even target specific interfaces.
 
 > **Note:** Changing system DNS settings typically requires `sudo` privileges.
 
 ```bash
-# Apply a preset (e.g., Cloudflare, Google, Quad9)
+# Apply a preset (e.g., Cloudflare, Google, AdGuard, Yandex)
 sudo cdns set cloudflare
 
 # Use custom IP addresses
@@ -107,11 +108,13 @@ sudo cdns set google --interface eth0
 ```
 
 **Helpful Flags for `set`:**
+
 - `--dry-run`: See what would happen without making any actual changes.
 - `--interface` or `-i`: Manually specify which interfaces to modify.
 - `--yes`: Skip confirmation prompts (perfect for scripts).
 
 #### 2. Explore Presets
+
 Not sure which provider to use? List all available presets to see names and IP addresses.
 
 ```bash
@@ -119,6 +122,7 @@ cdns list
 ```
 
 #### 3. Check Current Status
+
 Verify your active DNS configuration and see which backend (NetworkManager, systemd-resolved, etc.) is being used.
 
 ```bash
@@ -129,6 +133,7 @@ cdns status --json
 ```
 
 #### 4. Instant Reset
+
 If you need to roll back to your previous configuration, the `reset` command has your back.
 
 ```bash

@@ -36,7 +36,7 @@ func NewPresetCommand(params PresetCommandParams) PresetCommandResult {
 		Short: "Apply a DNS preset",
 		Long: `Apply a DNS preset to network interfaces.
 
-Available presets: cloudflare, google, quad9, opendns, adguard
+Use 'cdns list' to see all available presets (Cloudflare, Google, Quad9, AdGuard, etc.).
 
 Examples:
   # Apply Cloudflare DNS to active interfaces
