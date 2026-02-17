@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/junevm/cdns/compare/v1.0.0...v1.0.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* **goreleaser:** correct build configuration and tidy command path ([829e9ab](https://github.com/junevm/cdns/commit/829e9ab9fa34119029532274145ef24e889da2cc))
+
 # 1.0.0 (2026-02-17)
 
 
