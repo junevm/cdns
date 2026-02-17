@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/junevm/cdns/compare/v1.0.1...v1.0.2) (2026-02-17)
+
+
+### Bug Fixes
+
+* **deps:** update lefthook to version 2.1.1 and update checksums ([fea6db8](https://github.com/junevm/cdns/commit/fea6db8e9eb404cc622c0ea65ad0e196cc193208))
+
 ## [1.0.1](https://github.com/junevm/cdns/compare/v1.0.0...v1.0.1) (2026-02-17)
 
 
