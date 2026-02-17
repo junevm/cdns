@@ -4,17 +4,16 @@ version: 2
 
 before:
   hooks:
-    - go mod tidy -C apps/cli
+    - go mod tidy
 
 builds:
-  - dir: apps/cli
-    env:
+  - env:
       - CGO_ENABLED=0
     goos:
       - linux
     goarch:
       - amd64
-    main: ./cmd/cdns/main.go
+    main: ./main.go
     binary: cdns
     ldflags:
       - -s -w -X main.buildVersion={{.Version}} -X main.buildCommit={{.Commit}} -X main.buildDate={{.Date}} -X main.buildBy=goreleaser

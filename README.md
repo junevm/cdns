@@ -60,7 +60,7 @@ curl -sfL https://raw.githubusercontent.com/junevm/cdns/main/install.sh | sh
 If you have Go installed:
 
 ```bash
-go install github.com/junevm/cdns/apps/cli/cmd/cdns@latest
+go install github.com/junevm/cdns@latest
 ```
 
 ### Option 3: Homebrew (Linux)

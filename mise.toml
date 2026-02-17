@@ -37,42 +37,40 @@ echo "Project cleaned."
 
 [tasks.setup]
 description = "Set up the development environment"
-run = ["mise install", "mise cli:setup", "mise docs:setup"]
+run = ["mise install", "mise tidy"]
 
-[tasks."cli:setup"]
-description = "Set up the development dependencies for the server"
-dir = "apps/cli"
-run = ["go mod tidy"]
+[tasks.setup_tasks]
+description = "Setup tasks for simplicity"
+depends_on = ["setup"]
 
-
-[tasks."cli:dev"]
-description = "Run the CLI in development mode"
-dir = "apps/cli"
-run = ["go run ./cmd/cdns"]
-
-
-[tasks."cli:test"]
-description = "Run all tests for the CLI"
-dir = "apps/cli"
-run = "go test -v -race -coverprofile=coverage.out ./..."
-
-
-[tasks."cli:lint"]
-description = "Run linters on the CLI codebase"
-dir = "apps/cli"
-run = ["go vet ./... && go fmt ./...", "golangci-lint run"]
-
-
-[tasks."cli:tidy"]
-description = "Tidy Go modules for the CLI codebase"
-dir = "apps/cli"
+[tasks.tidy]
+description = "Tidy Go modules"
 run = "go mod tidy"
 
+[tasks.dev]
+description = "Run the CLI in development mode"
+run = ["go run ./main.go"]
 
-[tasks."cli:clean"]
-description = "Remove CLI build artifacts"
-dir = "apps/cli"
-run = ["go clean -i -cache -modcache -testcache -fuzzcache"]
+[tasks.test]
+description = "Run all tests for the CLI"
+run = "go test -v -race -coverprofile=coverage.out ./..."
+
+[tasks.lint]
+description = "Run linters on the CLI codebase"
+run = ["go vet ./... && go fmt ./...", "golangci-lint run"]
+
+[tasks.clean]
+description = "Cleanup the project and bring it to fresh state"
+run = '''
+# Remove all installed mise tools
+for tool in $(mise ls --installed | awk '{print $1}' | grep -v '^$'); do
+  if [ -n "$tool" ] && [ "$tool" != "Tool" ]; then
+    mise uninstall "$tool" 2>/dev/null || true
+  fi
+done
+git clean -fdX # Remove everything ignored by git
+echo "Project cleaned."
+'''
 
 
 [tasks."release:snapshot"]

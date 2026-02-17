@@ -6,19 +6,19 @@ pre-commit:
   parallel: true
   commands:
     format-go:
-      glob: "apps/cli/**/*.go"
+      glob: "**/*.go"
       run: |
         gofmt -w {staged_files}
         git add {staged_files}
       stage_fixed: true
 
     lint-go-fast:
-      glob: "apps/cli/**/*.go"
-      run: cd apps/cli && go vet ./...
+      glob: "**/*.go"
+      run: go vet ./...
 
     tidy-go-mod:
-      glob: "apps/cli/{go.mod,go.sum}"
-      run: cd apps/cli && go mod tidy && git add go.mod go.sum
+      glob: "{go.mod,go.sum}"
+      run: go mod tidy && git add go.mod go.sum
 
     check-secrets-basic:
       run: |
@@ -35,9 +35,9 @@ commit-msg:
 pre-push:
   commands:
     test-go:
-      glob: "apps/cli/**/*.go"
-      run: cd apps/cli && go test ./...
+      glob: "**/*.go"
+      run: go test ./...
 
     build-go:
-      glob: "apps/cli/**/*.go"
-      run: cd apps/cli && go build -o /dev/null ./cmd/cdns
+      glob: "**/*.go"
+      run: go build -o /dev/null .

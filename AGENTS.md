@@ -7,24 +7,23 @@ Before writing code for complex tasks, you MUST start with a `task_plan.md`.
 
 ## 📜 Project Overview
 
-**CDNS** is a monorepo containing a Go CLI tool and its documentation.
+**CDNS** is a Go-based CLI tool (Cobra + Bubble Tea) for managing DNS settings on Linux.
 
-- **Root**: Workspace config and governance.
-- **apps/cli**: Go-based CLI application (Cobra + Bubble Tea).
-- **apps/documentation**: Docusaurus-based documentation site.
+- **Root**: Application source code, configuration, and governance.
+- **internal/**: Core logic (DNS backends, models, features).
+- **main.go**: Application entry point.
 
 ## ⚡ Task Execution Rules
 
-1. **Scope**: Modify only what is requested. Isolate changes to the specific app (`cli` or `documentation`) unless it's a cross-cutting concern.
+1. **Scope**: Modify only what is requested.
 2. **Verification**: Always verify changes.
-   - CLI: `mise run cli:test`
-   - Docs: `mise run docs:build`
+   - Run: `mise test`
 3. **Naming**: The project is named **CDNS**. Avoid "avtoolz" or "go-cli".
 
 ## 🛠️ Development Environment
 
 - **Task Runner**: `mise` handles all dev tasks.
-- **Linting**: `golangci-lint` (via `mise run cli:lint`).
+- **Linting**: `golangci-lint` (via `mise lint`).
 - **Formatting**: Standard `gofmt`.
 
 ## 📝 Documentation Policy
