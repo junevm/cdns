@@ -49,7 +49,7 @@ This application follows **Hexagonal Architecture (Ports & Adapters)** with **De
 
 ```
 apps/cli/
-├── cmd/app/             # Application entry point (Fx wiring only)
+├── cmd/cdns/            # Application entry point (Fx wiring only)
 ├── internal/
 │   ├── cli/             # Cobra adapters (primary port)
 │   ├── config/          # Configuration infrastructure (Koanf)

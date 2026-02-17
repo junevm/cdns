@@ -40,4 +40,4 @@ pre-push:
 
     build-go:
       glob: "apps/cli/**/*.go"
-      run: cd apps/cli && go build -o /dev/null ./cmd/app
+      run: cd apps/cli && go build -o /dev/null ./cmd/cdns

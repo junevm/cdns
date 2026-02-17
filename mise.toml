@@ -48,7 +48,7 @@ run = ["go mod tidy"]
 [tasks."cli:dev"]
 description = "Run the CLI in development mode"
 dir = "apps/cli"
-run = ["go run ./cmd/app"]
+run = ["go run ./cmd/cdns"]
 
 
 [tasks."cli:test"]
