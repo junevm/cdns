@@ -3,6 +3,8 @@
 
 **change DNS servers effortlessly via terminal**
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/junevm/cdns)](https://goreportcard.com/report/github.com/junevm/cdns) [![Go Reference](https://pkg.go.dev/badge/github.com/junevm/cdns.svg)](https://pkg.go.dev/github.com/junevm/cdns)
+
 [**Usage**](#-usage) | [**Report Bugs**](https://github.com/junevm/cdns/issues) | [**Releases**](https://github.com/junevm/cdns/releases) | [**Contributing**](#-contributing)
 
 </div>
