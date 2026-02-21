@@ -100,13 +100,13 @@ The `set` command is the heart of CDNS. You can use it with a preset name, custo
 
 ```bash
 # Apply a preset (e.g., Cloudflare, Google, AdGuard, Yandex)
-sudo cdns set cloudflare
+cdns set cloudflare
 
 # Use custom IP addresses
-sudo cdns set 1.1.1.1 8.8.8.8
+cdns set 1.1.1.1 8.8.8.8
 
 # Target a specific network interface
-sudo cdns set google --interface eth0
+cdns set google --interface eth0
 ```
 
 **Helpful Flags for `set`:**
@@ -139,7 +139,7 @@ cdns status --json
 If you need to roll back to your previous configuration, the `reset` command has your back.
 
 ```bash
-sudo cdns reset
+cdns reset
 ```
 
 ## Contributing
