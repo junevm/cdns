@@ -11,12 +11,7 @@
 
 **CDNS (change DNS)** is a dead-simple terminal tool that handles the messy details of `systemd-resolved` and `NetworkManager` for you, so you can swap DNS providers in seconds without the headache.
 
-```
-  ___ ___  _  _ ___
- / __|   \| \| / __|
-| (__| |) | .  \__ \
- \___|___/|_|\_|___/
-```
+<img width="990" height="740" alt="image" src="https://github.com/user-attachments/assets/8035f055-dad3-406d-8f34-d5252b11fc5b" />
 
 ## Why CDNS?
 
