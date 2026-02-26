@@ -28,6 +28,7 @@ While CDNS is designed to work across various operating systems, here is the cur
 | :--------------- | :-------------- | :---------- |
 | **Linux**        | **Ubuntu**      | ✅ Verified |
 | **Linux**        | **Debian**      | ⚠️ Untested |
+| **Linux**        | **AlmaLinux**  | ✅ Verified |
 | **Linux**        | **Fedora**      | ⚠️ Untested |
 | **Linux**        | **Arch Linux**  | ⚠️ Untested |
 | **Linux**        | **Manjaro**     | ⚠️ Untested |
