@@ -1,9 +1,9 @@
 package set
 
 import (
-	"github.com/junevm/cdns/internal/config"
-	"github.com/junevm/cdns/internal/dns/backend"
 	"github.com/stretchr/testify/assert"
+	"gitlab.com/junevm/cdns/internal/config"
+	"gitlab.com/junevm/cdns/internal/dns/backend"
 	"log/slog"
 	"testing"
 )

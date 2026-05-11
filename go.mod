@@ -1,4 +1,4 @@
-module github.com/junevm/cdns
+module gitlab.com/junevm/cdns
 
 go 1.26
 

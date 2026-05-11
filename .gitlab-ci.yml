@@ -1,0 +1,36 @@
+stages:
+  - test
+  - release
+  - publish
+
+build_and_test:
+  stage: test
+  image: golang:1.26
+  script:
+    - go build -v ./...
+    - go test -v -race ./...
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+semantic_release:
+  stage: release
+  image: node:20
+  script:
+    - npm install -g semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
+    - npx semantic-release
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+goreleaser:
+  stage: publish
+  image:
+    name: goreleaser/goreleaser:latest
+    entrypoint: [""]
+  variables:
+    # Disable shallow clone so goreleaser can see previous tags for changelog
+    GIT_DEPTH: 0
+  script:
+    - goreleaser release --clean
+  rules:
+    - if: $CI_COMMIT_TAG

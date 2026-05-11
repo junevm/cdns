@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/junevm/cdns/internal/config"
-	"github.com/junevm/cdns/internal/dns/backend"
-	"github.com/junevm/cdns/internal/dns/models"
-	"github.com/junevm/cdns/internal/features/status"
-	"github.com/junevm/cdns/internal/ui"
+	"gitlab.com/junevm/cdns/internal/config"
+	"gitlab.com/junevm/cdns/internal/dns/backend"
+	"gitlab.com/junevm/cdns/internal/dns/models"
+	"gitlab.com/junevm/cdns/internal/features/status"
+	"gitlab.com/junevm/cdns/internal/ui"
 
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"

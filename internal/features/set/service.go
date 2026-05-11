@@ -10,12 +10,12 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/junevm/cdns/internal/config"
-	"github.com/junevm/cdns/internal/dns/backend"
-	"github.com/junevm/cdns/internal/dns/models"
-	"github.com/junevm/cdns/internal/dns/presets"
-	"github.com/junevm/cdns/internal/logger"
-	"github.com/junevm/cdns/internal/ui"
+	"gitlab.com/junevm/cdns/internal/config"
+	"gitlab.com/junevm/cdns/internal/dns/backend"
+	"gitlab.com/junevm/cdns/internal/dns/models"
+	"gitlab.com/junevm/cdns/internal/dns/presets"
+	"gitlab.com/junevm/cdns/internal/logger"
+	"gitlab.com/junevm/cdns/internal/ui"
 
 	tea "github.com/charmbracelet/bubbletea"
 )

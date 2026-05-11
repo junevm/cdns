@@ -5,9 +5,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/junevm/cdns/internal/config"
-	"github.com/junevm/cdns/internal/dns/presets"
-	"github.com/junevm/cdns/internal/ui"
+	"gitlab.com/junevm/cdns/internal/config"
+	"gitlab.com/junevm/cdns/internal/dns/presets"
+	"gitlab.com/junevm/cdns/internal/ui"
 
 	"github.com/charmbracelet/bubbles/table"
 	"github.com/charmbracelet/bubbles/textinput"

@@ -3,7 +3,7 @@ package presets_test
 import (
 	"testing"
 
-	"github.com/junevm/cdns/internal/dns/presets"
+	"gitlab.com/junevm/cdns/internal/dns/presets"
 )
 
 func TestCloudflare(t *testing.T) {

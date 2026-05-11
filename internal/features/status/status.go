@@ -7,9 +7,9 @@ import (
 	"log/slog"
 	"strings"
 
-	"github.com/junevm/cdns/internal/config"
-	"github.com/junevm/cdns/internal/dns/models"
-	"github.com/junevm/cdns/internal/ui"
+	"gitlab.com/junevm/cdns/internal/config"
+	"gitlab.com/junevm/cdns/internal/dns/models"
+	"gitlab.com/junevm/cdns/internal/ui"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"

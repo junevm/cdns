@@ -5,9 +5,9 @@ import (
 	"log/slog"
 	"testing"
 
-	"github.com/junevm/cdns/internal/dns/models"
-	"github.com/junevm/cdns/internal/features/status"
-	"github.com/junevm/cdns/internal/ui"
+	"gitlab.com/junevm/cdns/internal/dns/models"
+	"gitlab.com/junevm/cdns/internal/features/status"
+	"gitlab.com/junevm/cdns/internal/ui"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

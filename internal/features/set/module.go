@@ -3,8 +3,8 @@ package set
 import (
 	"fmt"
 
-	"github.com/junevm/cdns/internal/config"
-	"github.com/junevm/cdns/internal/ui"
+	"gitlab.com/junevm/cdns/internal/config"
+	"gitlab.com/junevm/cdns/internal/ui"
 
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"

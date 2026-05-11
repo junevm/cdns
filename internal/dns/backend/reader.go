@@ -8,8 +8,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/junevm/cdns/internal/dns/models"
-	"github.com/junevm/cdns/internal/features/status"
+	"gitlab.com/junevm/cdns/internal/dns/models"
+	"gitlab.com/junevm/cdns/internal/features/status"
 )
 
 // ConfigReader reads DNS configuration from different backends

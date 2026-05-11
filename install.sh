@@ -46,13 +46,13 @@ else
 fi
 
 # Construct download URL
-# Example: https://github.com/junevm/cdns/releases/download/v1.0.0/cdns_1.0.0_Linux_amd64.tar.gz
+# Example: https://gitlab.com/junevm/cdns/releases/download/v1.0.0/cdns_1.0.0_Linux_amd64.tar.gz
 
 VERSION=${LATEST_TAG#v}
 OS_CAP="$(echo "$OS" | awk '{print toupper(substr($0,1,1))substr($0,2)}')"
 # Correcting logic to handle GoReleaser naming convention: {{ .ProjectName }}_{{ .Version }}_{{ title .Os }}_{{ .Arch }}.tar.gz
 
-DOWNLOAD_URL="https://github.com/junevm/cdns/releases/download/$LATEST_TAG/${BINARY}_${VERSION}_${OS_CAP}_${ARCH}.tar.gz"
+DOWNLOAD_URL="https://gitlab.com/junevm/cdns/releases/download/$LATEST_TAG/${BINARY}_${VERSION}_${OS_CAP}_${ARCH}.tar.gz"
 
 # Download and extract
 TMP_DIR=$(mktemp -d)

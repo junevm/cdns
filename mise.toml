@@ -41,7 +41,7 @@ run = ["mise install", "mise tidy"]
 
 [tasks.setup_tasks]
 description = "Setup tasks for simplicity"
-depends_on = ["setup"]
+depends = ["setup"]
 
 [tasks.tidy]
 description = "Tidy Go modules"
@@ -59,18 +59,7 @@ run = "go test -v -race -coverprofile=coverage.out ./..."
 description = "Run linters on the CLI codebase"
 run = ["go vet ./... && go fmt ./...", "golangci-lint run"]
 
-[tasks.clean]
-description = "Cleanup the project and bring it to fresh state"
-run = '''
-# Remove all installed mise tools
-for tool in $(mise ls --installed | awk '{print $1}' | grep -v '^$'); do
-  if [ -n "$tool" ] && [ "$tool" != "Tool" ]; then
-    mise uninstall "$tool" 2>/dev/null || true
-  fi
-done
-git clean -fdX # Remove everything ignored by git
-echo "Project cleaned."
-'''
+
 
 
 [tasks."release:snapshot"]

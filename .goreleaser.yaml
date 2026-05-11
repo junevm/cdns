@@ -48,8 +48,8 @@ brews:
     repository:
       owner: junevm
       name: homebrew-tap
-      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
-    homepage: "https://github.com/junevm/cdns"
+      token: "{{ .Env.GITLAB_TOKEN }}"
+    homepage: "https://gitlab.com/junevm/cdns"
     description: "Linux DNS Management Made Simple"
     license: "MIT"
     install: |

@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/junevm/cdns/internal/dns/models"
+	"gitlab.com/junevm/cdns/internal/dns/models"
 )
 
 // SystemOps defines operations for interacting with the system

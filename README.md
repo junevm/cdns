@@ -3,22 +3,27 @@
 
 **change DNS servers effortlessly via terminal**
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/junevm/cdns)](https://goreportcard.com/report/github.com/junevm/cdns) [![Go Reference](https://pkg.go.dev/badge/github.com/junevm/cdns.svg)](https://pkg.go.dev/github.com/junevm/cdns)
+[![Go Report Card](https://goreportcard.com/badge/gitlab.com/junevm/cdns)](https://goreportcard.com/report/gitlab.com/junevm/cdns) [![Go Reference](https://pkg.go.dev/badge/gitlab.com/junevm/cdns.svg)](https://pkg.go.dev/gitlab.com/junevm/cdns)
 
-[**Usage**](#-usage) | [**Report Bugs**](https://github.com/junevm/cdns/issues) | [**Releases**](https://github.com/junevm/cdns/releases) | [**Contributing**](#-contributing)
+[**Usage**](#-usage) | [**Report Bugs**](https://gitlab.com/junevm/cdns/-/work_items) | [**Releases**](https://gitlab.com/junevm/cdns/-/releases) | [**Contributing**](#-contributing)
 
 </div>
 
+> [!WARNING]
+> **Repository Migrated to GitLab!**
+> This project is now developed and maintained on GitLab at [gitlab.com/junevm/cdns](https://gitlab.com/junevm/cdns).
+> The GitHub repository is just a mirror. Please **do not open issues or merge requests on GitHub**. Join us on GitLab!
+
 **CDNS (change DNS)** is a dead-simple terminal tool that handles the messy details of `systemd-resolved` and `NetworkManager` for you, so you can swap DNS providers in seconds without the headache.
 
-<img width="990" height="740" alt="image" src="https://github.com/user-attachments/assets/8035f055-dad3-406d-8f34-d5252b11fc5b" />
+<img width="990" height="740" alt="image" src="./assets/demo.png" />
 
 ## Why CDNS?
 
-- **🔐 Privacy in a click**: Easily switch to trusted providers like Quad9, Cloudflare, or AdGuard for a more secure browsing experience.
-- **✨ Terminal-first**: A clean, reactive TUI that makes managing network settings actually enjoyable.
-- **🧠 Zero-config discovery**: It just works. Whether you're on NetworkManager, systemd-resolved, or a plain old resolv.conf, CDNS finds it and handles the heavy lifting.
-- **🚑 Fail-safe**: Messed something up? Roll back to your previous configuration instantly with zero stress.
+- **Privacy in a click**: Easily switch to trusted providers like Quad9, Cloudflare, or AdGuard for a more secure browsing experience.
+- **Terminal-first**: A clean, reactive TUI that makes managing network settings actually enjoyable.
+- **Zero-config discovery**: It just works. Whether you're on NetworkManager, systemd-resolved, or a plain old resolv.conf, CDNS finds it and handles the heavy lifting.
+- **Fail-safe**: Messed something up? Roll back to your previous configuration instantly with zero stress.
 
 ## Compatibility
 
@@ -29,8 +34,8 @@ While CDNS is designed to work across various operating systems, here is the cur
 | **Linux**        | **Ubuntu**      | ✅ Verified |
 | **Linux**        | **Debian**      | ⚠️ Untested |
 | **Linux**        | **AlmaLinux**  | ✅ Verified |
-| **Linux**        | **Fedora**      | ⚠️ Untested |
-| **Linux**        | **Arch Linux**  | ⚠️ Untested |
+| **Linux**        | **Fedora**      | ✅ Verified |
+| **Linux**        | **Arch Linux**  | ✅ Verified |
 | **Linux**        | **Manjaro**     | ⚠️ Untested |
 | **Linux**        | **Pop!\_OS**    | ⚠️ Untested |
 | **Linux**        | **Linux Mint**  | ⚠️ Untested |
@@ -41,7 +46,7 @@ While CDNS is designed to work across various operating systems, here is the cur
 | **macOS**        | **Darwin**      | 🏗️ WIP      |
 | **Windows**      | **Windows 10+** | 🏗️ WIP      |
 
-_If it works for you on an untested distro, please [let us know](https://github.com/junevm/cdns/issues)!_
+_If it works for you on an untested distro, please [let us know](https://gitlab.com/junevm/cdns/issues)!_
 
 ## Installation
 
@@ -50,7 +55,7 @@ _If it works for you on an untested distro, please [let us know](https://github.
 The easiest way to install the latest release is via our installer script:
 
 ```bash
-curl -sfL https://raw.githubusercontent.com/junevm/cdns/main/install.sh | sh
+curl -sfL https://gitlab.com/junevm/cdns/-/raw/main/install.sh | sh
 ```
 
 ### Option 2: Go Install
@@ -58,19 +63,19 @@ curl -sfL https://raw.githubusercontent.com/junevm/cdns/main/install.sh | sh
 If you have Go installed:
 
 ```bash
-go install github.com/junevm/cdns@latest
+go install gitlab.com/junevm/cdns@latest
 ```
 
 ### Option 3: Homebrew (Linux)
 
 ```bash
-brew tap junevm/homebrew-tap
+brew tap junevm/homebrew-tap https://gitlab.com/junevm/homebrew-tap.git
 brew install cdns
 ```
 
 ### Option 4: Manual Download
 
-Download the latest binary for your architecture from the [Releases](https://github.com/junevm/cdns/releases) page.
+Download the latest binary for your architecture from the [Releases](https://gitlab.com/junevm/cdns/-/releases) page.
 
 ## Usage
 
