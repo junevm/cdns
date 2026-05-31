@@ -5,7 +5,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/junevm/cdns)](https://goreportcard.com/report/github.com/junevm/cdns) [![Go Reference](https://pkg.go.dev/badge/github.com/junevm/cdns.svg)](https://pkg.go.dev/github.com/junevm/cdns)
 
-[**Usage**](#-usage) | [**Report Bugs**](https://gitlab.com/junevm/cdns/-/work_items) | [**Releases**](https://gitlab.com/junevm/cdns/-/releases) | [**Contributing**](#-contributing)
+[**Usage**](#-usage) | [**Report Bugs**](https://github.com/junevm/cdns/issues) | [**Releases**](https://github.com/junevm/cdns/releases) | [**Contributing**](#-contributing)
 
 </div>
 
@@ -51,7 +51,7 @@ _If it works for you on an untested distro, please [let us know](https://github.
 The easiest way to install the latest release is via our installer script:
 
 ```bash
-curl -sfL https://gitlab.com/junevm/cdns/-/raw/main/install.sh | sh
+curl -sfL https://raw.githubusercontent.com/junevm/cdns/refs/heads/main/install.sh | sh
 ```
 
 ### Option 2: Go Install
@@ -71,7 +71,7 @@ brew install cdns
 
 ### Option 4: Manual Download
 
-Download the latest binary for your architecture from the [Releases](https://gitlab.com/junevm/cdns/-/releases) page.
+Download the latest binary for your architecture from the [Releases](https://github.com/junevm/cdns/releases) page.
 
 ## Usage
 
