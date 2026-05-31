@@ -3,16 +3,12 @@
 
 **change DNS servers effortlessly via terminal**
 
-[![Go Report Card](https://goreportcard.com/badge/gitlab.com/junevm/cdns)](https://goreportcard.com/report/gitlab.com/junevm/cdns) [![Go Reference](https://pkg.go.dev/badge/gitlab.com/junevm/cdns.svg)](https://pkg.go.dev/gitlab.com/junevm/cdns)
+[![Go Report Card](https://goreportcard.com/badge/github.com/junevm/cdns)](https://goreportcard.com/report/github.com/junevm/cdns) [![Go Reference](https://pkg.go.dev/badge/github.com/junevm/cdns.svg)](https://pkg.go.dev/github.com/junevm/cdns)
 
 [**Usage**](#-usage) | [**Report Bugs**](https://gitlab.com/junevm/cdns/-/work_items) | [**Releases**](https://gitlab.com/junevm/cdns/-/releases) | [**Contributing**](#-contributing)
 
 </div>
 
-> [!WARNING]
-> **Repository Migrated to GitLab!**
-> This project is now developed and maintained on GitLab at [gitlab.com/junevm/cdns](https://gitlab.com/junevm/cdns).
-> The GitHub repository is just a mirror. Please **do not open issues or merge requests on GitHub**. Join us on GitLab!
 
 **CDNS (change DNS)** is a dead-simple terminal tool that handles the messy details of `systemd-resolved` and `NetworkManager` for you, so you can swap DNS providers in seconds without the headache.
 
@@ -46,7 +42,7 @@ While CDNS is designed to work across various operating systems, here is the cur
 | **macOS**        | **Darwin**      | 🏗️ WIP      |
 | **Windows**      | **Windows 10+** | 🏗️ WIP      |
 
-_If it works for you on an untested distro, please [let us know](https://gitlab.com/junevm/cdns/issues)!_
+_If it works for you on an untested distro, please [let us know](https://github.com/junevm/cdns/issues)!_
 
 ## Installation
 
@@ -63,13 +59,13 @@ curl -sfL https://gitlab.com/junevm/cdns/-/raw/main/install.sh | sh
 If you have Go installed:
 
 ```bash
-go install gitlab.com/junevm/cdns@latest
+go install github.com/junevm/cdns@latest
 ```
 
 ### Option 3: Homebrew (Linux)
 
 ```bash
-brew tap junevm/homebrew-tap https://gitlab.com/junevm/homebrew-tap.git
+brew tap junevm/homebrew-tap https://github.com/junevm/homebrew-tap.git
 brew install cdns
 ```
 
